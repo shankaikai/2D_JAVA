@@ -68,6 +68,8 @@ public class SATSolver {
             }
 
             return solve(substitute(clauses,literal), env);
+        } else {
+
         }
 
         throw new RuntimeException("not yet implemented.");
