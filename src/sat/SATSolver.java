@@ -4,9 +4,7 @@ import java.util.*;
 
 import immutable.ImList;
 import sat.env.Environment;
-import sat.formula.Clause;
-import sat.formula.Formula;
-import sat.formula.Literal;
+import sat.formula.*;
 
 /**
  * A simple DPLL SAT solver. See http://en.wikipedia.org/wiki/DPLL_algorithm
@@ -58,6 +56,19 @@ public class SATSolver {
             }
         }
 
+        Literal literal = smallestClause.chooseLiteral();
+//      The variable literal is the first Literal in smallestClause.
+        if (smallestClause.isUnit()) {
+            if (literal instanceof PosLiteral) {
+                env = env.putTrue(literal.getVariable());
+//      Positive literal will have bool.TRUE
+            } else if (literal instanceof NegLiteral){
+                env = env.putFalse(literal.getVariable());
+//      Negative literal will have bool.FALSE
+            }
+
+            return solve(substit)
+        }
 
         throw new RuntimeException("not yet implemented.");
     }
