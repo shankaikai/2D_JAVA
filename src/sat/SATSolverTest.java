@@ -18,10 +18,18 @@ public class SATSolverTest {
     Literal nb = b.getNegation();
     Literal nc = c.getNegation();
 
-
+    
 
 	
 	// TODO: add the main method that reads the .cnf file and calls SATSolver.solve to determine the satisfiability
+    public static void main(String[] args) {
+        System.out.println("SAT solver starts!!!");
+        long started = System.nanoTime();
+        Environment env = SATSolver.solve(formula);
+        long time = System.nanoTime();
+        long timeTaken = time - started;
+        System.out.println("Time:" + timeTaken / 1000000.0 + "ms");
+    }
     
 	
     public void testSATSolver1(){
