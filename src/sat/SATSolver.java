@@ -46,15 +46,13 @@ public class SATSolver {
         if (clauses.isEmpty()) {return env;}
 //      no clauses, the formula is trivially satisfiable.
 
-        int smallestClauseSize = clauses.first().size();
         Clause smallestClause = clauses.first();
 
         for (Clause cl: clauses) {
             if (cl.isEmpty()) {return null;}
 //      empty clause, the clause is unsatisfiable.
 
-            if (cl.size() < smallestClauseSize) {
-                smallestClauseSize = cl.size();
+            if (cl.size() < smallestClause.size()) {
                 smallestClause = cl;
             }
         }
