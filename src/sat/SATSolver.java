@@ -67,7 +67,10 @@ public class SATSolver {
 //      Negative literal will have bool.FALSE
             }
 
-            return solve(substitute, env)
+            return solve(substitute(clauses,literal), env);
+
+        } else {
+
         }
 
         throw new RuntimeException("not yet implemented.");
@@ -86,6 +89,13 @@ public class SATSolver {
     private static ImList<Clause> substitute(ImList<Clause> clauses,
             Literal l) {
         // TODO: implement this.
+        for (Clause cl : clauses) {
+            if (cl.contains(l)) {
+                clauses = clauses.remove(cl);
+            } else if (cl.contains(l.getNegation())) {
+                clauses = clauses.remove(cl).add(cl.reduce(l));
+            }
+        }
         throw new RuntimeException("not yet implemented.");
     }
 
