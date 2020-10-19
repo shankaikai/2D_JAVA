@@ -86,6 +86,13 @@ public class SATSolver {
     private static ImList<Clause> substitute(ImList<Clause> clauses,
             Literal l) {
         // TODO: implement this.
+        for (Clause cl : clauses) {
+            if (cl.contains(l)) {
+                clauses = clauses.remove(cl);
+            } else if (cl.contains(l.getNegation())) {
+                clauses = clauses.remove(cl).add(cl.reduce(l));
+            }
+        }
         throw new RuntimeException("not yet implemented.");
     }
 
