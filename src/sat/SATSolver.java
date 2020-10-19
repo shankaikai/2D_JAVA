@@ -98,7 +98,6 @@ public class SATSolver {
      */
     private static ImList<Clause> substitute(ImList<Clause> clauses,
             Literal l) {
-        // TODO: implement this.
         ImList<Clause> new_list = new EmptyImList<Clause>();
         for (Clause clause : clauses) {
             if (clause.contains(l) || clause.contains(l.getNegation())) {
@@ -110,5 +109,4 @@ public class SATSolver {
         }
         return new_list;
     }
-
 }
