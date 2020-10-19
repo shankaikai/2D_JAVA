@@ -4,6 +4,7 @@ import java.util.*;
 
 import javax.xml.stream.events.Comment;
 
+import immutable.EmptyImList;
 import immutable.ImList;
 import sat.env.Environment;
 import sat.formula.*;
@@ -69,7 +70,7 @@ public class SATSolver {
 //      Negative literal will have bool.FALSE
             }
 
-            return solve(substitute(clauses,literal), env);
+            return solve(substitute(clauses, literal), env);
 
         } else {
 // Comment
@@ -91,14 +92,16 @@ public class SATSolver {
     private static ImList<Clause> substitute(ImList<Clause> clauses,
             Literal l) {
         // TODO: implement this.
-        for (Clause cl : clauses) {
-            if (cl.contains(l)) {
-                clauses = clauses.remove(cl);
-            } else if (cl.contains(l.getNegation())) {
-                clauses = clauses.remove(cl).add(cl.reduce(l));
+        ImList<Clause> new_list = new EmptyImList<Clause>();
+        for (Clause clause : clauses) {
+            if (clause.contains(l) || clause.contains(l.getNegation())) {
+                clause.reduce(l);
+            }
+            if (clause != null) {
+                new_list.add(clause);
             }
         }
-        throw new RuntimeException("not yet implemented.");
+        return new_list;
     }
 
 }
