@@ -73,10 +73,14 @@ public class SATSolver {
             return solve(substitute(clauses, literal), env);
 
         } else {
-// Comment
+            env = env.putTrue(literal.getVariable());
+            Environment testLiteral = solve(substitute(clauses, literal),env);
+            if (testLiteral == null){
+                env = env.putFalse(literal.getVariable());
+                return solve(substitute(clauses,literal.getNegation()),env);
+            }
+            return testLiteral;
         }
-
-        throw new RuntimeException("not yet implemented.");
     }
 
     /**
