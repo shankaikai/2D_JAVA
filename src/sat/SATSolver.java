@@ -2,6 +2,8 @@ package sat;
 
 import java.util.*;
 
+import javax.xml.stream.events.Comment;
+
 import immutable.ImList;
 import sat.env.Environment;
 import sat.formula.*;
@@ -69,7 +71,7 @@ public class SATSolver {
 
             return solve(substitute(clauses,literal), env);
         } else {
-
+// Comment
         }
 
         throw new RuntimeException("not yet implemented.");
