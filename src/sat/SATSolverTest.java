@@ -37,7 +37,7 @@ public class SATSolverTest {
 	
 	// TODO: add the main method that reads the .cnf file and calls SATSolver.solve to determine the satisfiability
     public static void main(String[] args) {
-        String file_path = "C:/Users/tiong/Documents/GitHub/2D_JAVA/sampleCNF/largeSat.cnf";
+        String file_path = "C:/Users/tiong/Documents/GitHub/2D_JAVA/sampleCNF/s8Sat.cnf";
         Formula formula = convertCNF(file_path);
         System.out.println("SAT solver starts!!!");
         long started = System.nanoTime();

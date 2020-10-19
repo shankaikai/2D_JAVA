@@ -43,11 +43,12 @@ public class SATSolver {
      *         or null if no such environment exists.
      */
     private static Environment solve(ImList<Clause> clauses, Environment env) {
-
+        
         // no clauses, the formula is trivially satisfiable.
         if (clauses.isEmpty()) {
             return env;
         }
+
         Clause smallestClause = clauses.first();
 
         for (Clause cl: clauses) {
@@ -62,32 +63,34 @@ public class SATSolver {
             }
         }
 
-        Literal literal = smallestClause.chooseLiteral();
         // The variable literal is the first Literal in smallestClause.
+        Literal literal = smallestClause.chooseLiteral();
+        
         if (smallestClause.isUnit()) {
+
             if (literal instanceof PosLiteral) {
-                env = env.putTrue(literal.getVariable());
-            // Positive literal will have bool.TRUE
-            } else if (literal instanceof NegLiteral){
-                env = env.putFalse(literal.getVariable());
+                return solve(substitute(clauses, literal), env.putTrue(literal.getVariable()));
+                // Positive literal will have bool.TRUE
+            } else {
+                return solve(substitute(clauses, literal), env.putFalse(literal.getVariable()));
                 // Negative literal will have bool.FALSE
             }
-
-            return solve(substitute(clauses, literal), env);
+            
 
         } else {
-            env = env.putTrue(literal.getVariable());
-            // set literal to TRUE
-            Environment testLiteral = solve(substitute(clauses, literal), env);
+
+            Environment testE = solve(substitute(clauses, literal), env.putTrue(literal.getVariable()));
+
             // substitute it in all clause
-            if (testLiteral == null){
-                env = env.putFalse(literal.getVariable());
-            // set literal to FALSE as testLiteral == null
-                return solve(substitute(clauses,literal.getNegation()), env);
+            if (testE == null){
+                testE = solve(substitute(clauses, literal.getNegation()), env.putFalse(literal.getVariable()));
+
             }
-            return testLiteral;
+            return testE;
         }
     }
+
+
 
     /**
      * given a clause list and literal, produce a new list resulting from
@@ -102,22 +105,21 @@ public class SATSolver {
     private static ImList<Clause> substitute(ImList<Clause> clauses, Literal l) {
 
         // Initiate new clause list
-        ImList<Clause> new_list = new EmptyImList<Clause>();
+        ImList<Clause> out = new EmptyImList<Clause>();
 
         // Iterate through all the clauses in the clause list
-        for (Clause clause : clauses) {
-
+        for (Clause cl : clauses) {
+            
             // Check if clause contains the literal l or its negation
-            if (clause.contains(l) || clause.contains(l.getNegation())) {
-                // Set literal to true
-                clause.reduce(l);
-            }
-
-            // If the result is not null, add the clause to the new clause list
-            if (clause != null) {
-                new_list.add(clause);
-            }
+            if (cl.contains(l.getNegation())) {
+                // Set literal to true if cl contains the negation of l
+                out = out.add(cl.reduce(l));
+            
+            } else if (!cl.contains(l)) {
+                // Add the clause to the output list if the clause does not contain l
+                out = out.add(cl);
+            }           
         }
-        return new_list;
+        return out;
     }
 }
