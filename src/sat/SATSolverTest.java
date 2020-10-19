@@ -25,12 +25,12 @@ import sat.formula.*;
 
 
 public class SATSolverTest {
-    Literal a = PosLiteral.make("a");
-    Literal b = PosLiteral.make("b");
-    Literal c = PosLiteral.make("c");
-    Literal na = a.getNegation();
-    Literal nb = b.getNegation();
-    Literal nc = c.getNegation();
+    // Literal a = PosLiteral.make("a");
+    // Literal b = PosLiteral.make("b");
+    // Literal c = PosLiteral.make("c");
+    // Literal na = a.getNegation();
+    // Literal nb = b.getNegation();
+    // Literal nc = c.getNegation();
 
     
 
@@ -85,7 +85,7 @@ public class SATSolverTest {
         
         ArrayList<Literal> lList = new ArrayList<>();
         ArrayList<Clause> cList = new ArrayList<>();
-        int i = 0;
+        
         for (String row : rows) {
         
             if (row.length() != 0) {
@@ -95,11 +95,11 @@ public class SATSolverTest {
                     continue;
                 } else {
                     
-                    // Read input eg 1 2 3
+                    // Split each row into an array 
                     String[] lArr = row.split(" ");
 
                     for (String l : lArr) {
-                        i += 1;
+                        
                         if (l.charAt(0) == '-') {
                             Literal lit = NegLiteral.make(l.substring(1));
                             lList.add(lit);
@@ -141,7 +141,6 @@ public class SATSolverTest {
 //     }
     
     private static Formula makeFm(ArrayList<Clause> e) {
-        System.out.println(e.size());
         Formula f = new Formula();
         for (Clause c : e) {
             f = f.addClause(c);
