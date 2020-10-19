@@ -37,32 +37,42 @@ public class SATSolverTest {
 	
 	// TODO: add the main method that reads the .cnf file and calls SATSolver.solve to determine the satisfiability
     public static void main(String[] args) {
-        String file_path = "C:/Users/tiong/Documents/GitHub/2D_JAVA/sampleCNF/s8Sat.cnf";
+        String file_path = "C:/Users/tiong/Documents/GitHub/2D_JAVA/sampleCNF/largeSat.cnf";
         Formula formula = convertCNF(file_path);
         System.out.println("SAT solver starts!!!");
         long started = System.nanoTime();
         Environment env = SATSolver.solve(formula);
-        System.out.println(env);
+        createTxt(env);
         long time = System.nanoTime();
         long timeTaken = time - started;
         System.out.println("Time:" + timeTaken / 1000000.0 + "ms");
     }
     
-    // public static createTxt(Environment e) {
-    //     if (e == null) {
-    //         System.out.println("Unstatisfiable Bro!");
-    //     } else {
-    //         System.out.println("Satisfiable Bro!");
+    public static void createTxt(Environment env) {
+        if (env == null) {
+            System.out.println("Unstatisfiable bro!");
+        } else {
+            System.out.println("Satisfiable bro!");
 
-    //         try {
-    //             File out = new File("BoolAssignment.txt");
-    //             Writer wF = new FileOutputStream(out);
-                
-    //         } catch (Exception e) {
-    //             //TODO: handle exception
-    //         }
-    //     }
-    // }
+            try {
+                File out = new File("BoolAssignment.txt");
+                out.createNewFile();
+                System.out.println(out.getName() + " created bro!");
+                FileWriter writer = new FileWriter(out.getName());
+                String sEnv = env.toString().replace("Environment:[", "").replace("]", "");
+                String[] rows = sEnv.split(", ");
+                System.out.println(rows.length);
+                for (String row : rows) {
+                    writer.write(row + "\n");
+                }
+                writer.close();
+                System.out.println("Solution wrote bro!");
+
+            } catch (IOException e) {
+                System.out.println("IO Exception bro...");
+            }
+        }
+    }
 
     public static Formula convertCNF(String file) {
         List<String> rows;
