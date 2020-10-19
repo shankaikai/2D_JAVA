@@ -74,12 +74,12 @@ public class SATSolver {
 
         } else {
             env = env.putTrue(literal.getVariable());
-//set literal to TRUE
+//      set literal to TRUE
             Environment testLiteral = solve(substitute(clauses, literal),env);
-//substitute it in all clause
+//      substitute it in all clause
             if (testLiteral == null){
                 env = env.putFalse(literal.getVariable());
-//set literal to FALSE as testLiteral == null
+//      set literal to FALSE as testLiteral == null
                 return solve(substitute(clauses,literal.getNegation()),env);
             }
             return testLiteral;
