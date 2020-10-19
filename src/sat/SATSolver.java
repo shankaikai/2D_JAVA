@@ -67,7 +67,7 @@ public class SATSolver {
 //      Negative literal will have bool.FALSE
             }
 
-            return solve(substitute, env)
+            return solve(substitute(clauses,literal), env);
         }
 
         throw new RuntimeException("not yet implemented.");
