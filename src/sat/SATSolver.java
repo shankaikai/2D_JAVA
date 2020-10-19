@@ -70,6 +70,7 @@ public class SATSolver {
             }
 
             return solve(substitute(clauses,literal), env);
+
         } else {
 // Comment
         }
