@@ -42,10 +42,10 @@ public class SATSolverTest {
         System.out.println("SAT solver starts!!!");
         long started = System.nanoTime();
         Environment env = SATSolver.solve(formula);
-        createTxt(env);
         long time = System.nanoTime();
         long timeTaken = time - started;
         System.out.println("Time:" + timeTaken / 1000000.0 + "ms");
+        createTxt(env);
     }
     
     public static void createTxt(Environment env) {
@@ -61,7 +61,7 @@ public class SATSolverTest {
                 FileWriter writer = new FileWriter(out.getName());
                 String sEnv = env.toString().replace("Environment:[", "").replace("]", "");
                 String[] rows = sEnv.split(", ");
-                System.out.println(rows.length);
+                // System.out.println(rows.length);
                 for (String row : rows) {
                     writer.write(row + "\n");
                 }
@@ -85,18 +85,23 @@ public class SATSolverTest {
         
         ArrayList<Literal> lList = new ArrayList<>();
         ArrayList<Clause> cList = new ArrayList<>();
-
+        int i = 0;
         for (String row : rows) {
+        
             if (row.length() != 0) {
+                
                 if (row.charAt(0) == 'c' || row.charAt(0) == 'p') {
                     // Ignore if the string is a comment/problem statement
                     continue;
                 } else {
+                    
                     // Read input eg 1 2 3
                     String[] lArr = row.split(" ");
+
                     for (String l : lArr) {
+                        i += 1;
                         if (l.charAt(0) == '-') {
-                            Literal lit = NegLiteral.make(l.substring(1,2));
+                            Literal lit = NegLiteral.make(l.substring(1));
                             lList.add(lit);
                         } else if (l.charAt(0) != '0') {
                             Literal lit = PosLiteral.make(l);
@@ -136,6 +141,7 @@ public class SATSolverTest {
 //     }
     
     private static Formula makeFm(ArrayList<Clause> e) {
+        System.out.println(e.size());
         Formula f = new Formula();
         for (Clause c : e) {
             f = f.addClause(c);

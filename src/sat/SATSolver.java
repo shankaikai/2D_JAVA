@@ -1,9 +1,6 @@
 package sat;
 
 import java.util.*;
-
-import javax.xml.stream.events.Comment;
-
 import immutable.EmptyImList;
 import immutable.ImList;
 import sat.env.Environment;
