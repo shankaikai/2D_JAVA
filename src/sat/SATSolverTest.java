@@ -21,16 +21,7 @@ import sat.formula.*;
 
 
 public class SATSolverTest {
-    // Literal a = PosLiteral.make("a");
-    // Literal b = PosLiteral.make("b");
-    // Literal c = PosLiteral.make("c");
-    // Literal na = a.getNegation();
-    // Literal nb = b.getNegation();
-    // Literal nc = c.getNegation();
 
-    
-
-	
     public static void main(String[] args) {
         String file_path = args[0];
         Formula formula = convertCNF("sampleCNF/"+file_path);
@@ -114,26 +105,7 @@ public class SATSolverTest {
 
         return makeFm(cList);
     }
-    
-//     public void testSATSolver1(){
-//     	// (a v b)
-//     	Environment e = SATSolver.solve(makeFm(makeCl(a,b))	);
-// /*
-//     	assertTrue( "one of the literals should be set to true",
-//     			Bool.TRUE == e.get(a.getVariable())  
-//     			|| Bool.TRUE == e.get(b.getVariable())	);
-    	
-// */    	
-//     }
-    
-    
-//     public void testSATSolver2(){
-//     	// (~a)
-//     	Environment e = SATSolver.solve(makeFm(makeCl(na)));
-// /*
-//     	assertEquals( Bool.FALSE, e.get(na.getVariable()));
-// */    	
-//     }
+
     
     private static Formula makeFm(ArrayList<Clause> e) {
         Formula f = new Formula();
