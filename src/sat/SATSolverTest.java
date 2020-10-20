@@ -1,9 +1,6 @@
 package sat;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -11,8 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Collection;
-import java.util.Collections;
+
 
 /*
 import static org.junit.Assert.*;
@@ -35,9 +31,8 @@ public class SATSolverTest {
     
 
 	
-	// TODO: add the main method that reads the .cnf file and calls SATSolver.solve to determine the satisfiability
     public static void main(String[] args) {
-        String file_path = "C:/Users/tiong/Documents/GitHub/2D_JAVA/sampleCNF/test_2020.cnf";
+        String file_path = "C:/Users/tiong/Documents/GitHub/2D_JAVA/sampleCNF/unsat2.cnf";
         Formula formula = convertCNF(file_path);
         System.out.println("SAT solver starts!!!");
         long started = System.nanoTime();
@@ -96,7 +91,7 @@ public class SATSolverTest {
                 } else {
                     
                     // Split each row into an array 
-                    String[] lArr = row.trim().split(" ");
+                    String[] lArr = row.trim().split("\\s+");
 
                     for (String l : lArr) {
                         
