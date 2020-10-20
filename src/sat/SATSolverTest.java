@@ -33,7 +33,7 @@ public class SATSolverTest {
 	
     public static void main(String[] args) {
         String file_path = args[0];
-        Formula formula = convertCNF(file_path);
+        Formula formula = convertCNF("sampleCNF/"+file_path);
         System.out.println("SAT solver starts!!!");
         long started = System.nanoTime();
         Environment env = SATSolver.solve(formula);
