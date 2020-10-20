@@ -45,9 +45,9 @@ public class SATSolverTest {
     
     public static void createTxt(Environment env) {
         if (env == null) {
-            System.out.println("Unstatisfiable bro!");
+            System.out.println("Results: Unsatisfiable");
         } else {
-            System.out.println("Satisfiable bro!");
+            System.out.println("Results: Satisfiable");
 
             try {
                 File out = new File("BoolAssignment.txt");
