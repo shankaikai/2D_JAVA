@@ -37,7 +37,7 @@ public class SATSolverTest {
 	
 	// TODO: add the main method that reads the .cnf file and calls SATSolver.solve to determine the satisfiability
     public static void main(String[] args) {
-        String file_path = "C:/Users/tiong/Documents/GitHub/2D_JAVA/sampleCNF/largeSat.cnf";
+        String file_path = "C:/Users/tiong/Documents/GitHub/2D_JAVA/sampleCNF/test_2020.cnf";
         Formula formula = convertCNF(file_path);
         System.out.println("SAT solver starts!!!");
         long started = System.nanoTime();
@@ -87,7 +87,7 @@ public class SATSolverTest {
         ArrayList<Clause> cList = new ArrayList<>();
         
         for (String row : rows) {
-        
+            
             if (row.length() != 0) {
                 
                 if (row.charAt(0) == 'c' || row.charAt(0) == 'p') {
@@ -96,7 +96,7 @@ public class SATSolverTest {
                 } else {
                     
                     // Split each row into an array 
-                    String[] lArr = row.split(" ");
+                    String[] lArr = row.trim().split(" ");
 
                     for (String l : lArr) {
                         
