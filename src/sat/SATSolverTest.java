@@ -32,7 +32,7 @@ public class SATSolverTest {
 
 	
     public static void main(String[] args) {
-        String file_path = "C:/Users/tiong/Documents/GitHub/2D_JAVA/sampleCNF/unsat2.cnf";
+        String file_path = args[0];
         Formula formula = convertCNF(file_path);
         System.out.println("SAT solver starts!!!");
         long started = System.nanoTime();
