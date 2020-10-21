@@ -1,6 +1,5 @@
 package sat;
 
-import java.util.*;
 import immutable.EmptyImList;
 import immutable.ImList;
 import sat.env.Environment;

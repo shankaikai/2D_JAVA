@@ -9,13 +9,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-
-/*
-import static org.junit.Assert.*;
-
-import org.junit.Test;
-*/
-
 import sat.env.*;
 import sat.formula.*;
 
@@ -47,7 +40,7 @@ public class SATSolverTest {
                 FileWriter writer = new FileWriter(out.getName());
                 String sEnv = env.toString().replace("Environment:[", "").replace("]", "");
                 String[] rows = sEnv.split(", ");
-                // System.out.println(rows.length);
+                
                 for (String row : rows) {
                     writer.write(row + "\n");
                 }
@@ -122,7 +115,4 @@ public class SATSolverTest {
         }
         return c;
     }
-    
-    
-    
 }
